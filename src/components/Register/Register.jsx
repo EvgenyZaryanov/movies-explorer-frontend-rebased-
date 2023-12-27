@@ -1,89 +1,73 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../images/logo-svg.svg';
-import useValidationForm from '../hooks/useValidationForm';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import FormInput from "../FormInput/FormInput";
+import { isValidEmail, isValidName } from "../../utils/validationConfig";
 
-function Register({ handleRegister }) {
-  const { values, handleChange, resetForm, errors, isValid } = useValidationForm();
+function Register({ onRegister }) {
+    const [name, setName] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [isDisabled, setIsDisabled] = useState(true);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleRegister(values);
-  }
+    const handleName = (value) => {
+        setName(value);
+    }
 
-  React.useEffect(() => {
-    resetForm();
-  }, [resetForm]);
+    const handleLogin = (value) => {
+        setLogin(value);
+    }
 
-  return (
-    <main className="main">
-      <form name="registration" className="auth-form" noValidate onSubmit={handleSubmit}>
-        <div className="auth-form__container">
-          <Link to="/" className="auth-form__container-link">
-            <img src={logo} alt="Логотип проекта" className="auth-form__logo" />
-          </Link>
-          <h1 className="auth-form__title">Добро пожаловать!</h1>
-          <h2 className="auth-form__input-title">Имя</h2>
-          <input
-            className={`auth-form__input ${errors.name && 'auth-form__error'}`}
-            onChange={handleChange}
-            value={values.name || ''}
-            type="name"
-            name="name"
-            placeholder="Введите ваше имя"
-            autoComplete="off"
-            required
-            minLength={2}
-            maxLength={30}
-          />
-          <span className="auth-form__error">{errors.name || ''}</span>
-          <h2 className="auth-form__input-title">Email</h2>
-          <input
-            className={`auth-form__input ${errors.email && 'auth-form__error'}`}
-            onChange={handleChange}
-            value={values.email || ''}
-            type="email"
-            name="email"
-            placeholder="Введите ваш email"
-            required
-            autoComplete="off"
-          />
-          <span className="auth-form__error">{errors.email || ''}</span>
-          <h2 className="auth-form__input-title">Пароль</h2>
-          <input
-            className={`auth-form__input ${errors.password && 'auth-form__error'}`}
-            onChange={handleChange}
-            value={values.password || ''}
-            type="password"
-            name="password"
-            minLength={6}
-            maxLength={30}
-            placeholder="Введите ваш пароль"
-            required
-            autoComplete="off"
-          />
-          <span className="auth-form__error">{errors.password || ''}</span>
-          <Link to="/movies" className="auth-form__button">
-            <button
-              type="submit"
-              className={`auth-form__submit-button ${
-                !isValid && 'auth-form__submit-button_disabled'
-              }`}
-              disabled={!isValid}
-            >
-              Зарегистрироваться
-            </button>
-          </Link>
-          <p className="auth-form__text">
-            Уже зарегистрированы?
-            <Link to="/signin" className="auth-form__link">
-              Войти
-            </Link>
-          </p>
+    const handlePassword = (value) => {
+        setPassword(value);
+    }
+
+    useEffect(() => {
+        (name && login && password) ? setIsDisabled(false) : setIsDisabled(true);
+    }, [login, password, name])
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        onRegister(login, password, name);
+    }
+
+    return (
+        <div className="sign">
+            <Link to='/' className="sign__logo" />
+            <h2 className="sign__title">Добро пожаловать!</h2>
+            <form className="sign__form" id="register-form-container" name="register-form" onSubmit={handleSubmit}>
+                <FormInput className='sign'
+                    htmlFor='name'
+                    id='register-name-input'
+                    name='name'
+                    type='text'
+                    placeholder='Имя'
+                    handleValue={handleName}
+                    checkValue={isValidName}
+                />
+                <FormInput
+                    className='sign'
+                    htmlFor='email'
+                    id='register-email-input'
+                    name='email'
+                    type='email'
+                    placeholder='Email'
+                    handleValue={handleLogin}
+                    checkValue={isValidEmail}
+                />
+                <FormInput
+                    className='sign'
+                    htmlFor='password'
+                    id='register-password-input'
+                    name='password'
+                    type='password'
+                    placeholder='Пароль'
+                    handleValue={handlePassword}
+                />
+                <button disabled={isDisabled} type="submit" className={`sign__submit ${isDisabled ? 'sign__submit_disabled' : ''}`}>Зарегистрироваться</button>
+            </form>
+            <p className="sign__question">Уже зарегистрированы? <Link to="/signin" className="sign__redirect">Войти</Link></p>
         </div>
-      </form>
-    </main>
-  );
+    );
 }
 
 export default Register;

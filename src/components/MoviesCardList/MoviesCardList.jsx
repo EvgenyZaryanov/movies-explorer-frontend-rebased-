@@ -1,69 +1,62 @@
-import { useState, useEffect } from 'react';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import { useState, useEffect } from "react";
+import useResize from "../../utils/useResize";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList() {
-  const initialCardsToShow = 12;
-  const additionalCardsToShow = 3;
+function MoviesCardList({ isLoading, films, searchText, onSave, onDelete }) {
+    const [moreFilms, setMoreFilms] = useState(0);
+    const [showedFilms, setShowedFilms] = useState(0);
+    const windowWidth = useResize();
 
-  const allCards = [
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard }
-  ];
+    useEffect(() => {
+        let cardsColumns = Math.floor(windowWidth / 300);
+        let cardsRows = 4;
+        if (cardsColumns > 4) {
+            cardsColumns = 3;
+        } else if (windowWidth < 690) {
+            cardsColumns = 1;
+            cardsRows = 5;
+        }
+        setMoreFilms(cardsColumns);
+        setShowedFilms(cardsColumns * cardsRows);
+    }, [windowWidth])
 
-  const [cardsToShow, setCardsToShow] = useState(initialCardsToShow);
+    const addFilms = () => {
+        const remainingFilms = showedFilms + moreFilms < films.length ? showedFilms + moreFilms : films.length;
 
-  const handleShowMore = () => {
-    setCardsToShow(prevCardsToShow => prevCardsToShow + additionalCardsToShow);
-  };
+        setShowedFilms(remainingFilms);
+    }
 
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width >= 1280) {
-        setCardsToShow(12);
-      } else if (width >= 768) {
-        setCardsToShow(8);
-      } else if (width >= 425) {
-        setCardsToShow(5);
-      } else {
-        setCardsToShow(5);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return (
-    <section className="movie-cardList">
-      <ul className="movie-cardList__container">
-        {allCards.slice(0, cardsToShow).map((card, index) => (
-          <MoviesCard key={index} {...card} />
-        ))}
-      </ul>
-      {cardsToShow < allCards.length && (
-        <button className="movie-cardList__more-button" type="button" onClick={handleShowMore}>
-          Еще
-        </button>
-      )}
-    </section>
-  );
+    return (
+        <>
+            {films.length > 0  ? (
+                <div className="movies__container">
+                    {isLoading ?
+                        <Preloader /> :
+                        <>
+                            {films
+                                .slice(0, showedFilms)
+                                .map((film) =>
+                                    <MoviesCard
+                                        key={film.id ? film.id : film.movieId}
+                                        movieId={film.id ? film.id : film.movieId}
+                                        film={film}
+                                        trailer={film.trailerLink}
+                                        image={film.image.url ? `https://api.nomoreparties.co/${film.image.url}` : film.image}
+                                        title={film.nameRU}
+                                        duration={film.duration}
+                                        onSave={onSave}
+                                        onDelete={onDelete}
+                                    />)}
+                            {(films.length > showedFilms) && <button onClick={addFilms} className="movies__more">Ещё</button>}
+                        </>
+                    }
+                </div>
+            ) : (
+                <p className="movies__container_info">{searchText}</p>
+            )}
+        </>
+    );
 }
 
 export default MoviesCardList;

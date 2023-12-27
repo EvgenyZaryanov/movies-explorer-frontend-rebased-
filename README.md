@@ -1,7 +1,14 @@
 # movies-explorer-frontend
 
-Second part of my diploma project (frontend)
+Фронтенд-часть дипломной работы.
 
-## Ссылка на макет
+# Описание:
 
-- Макет dark-2: https://www.figma.com/file/muHBdaOkBPY9EilVzglJ5G/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-(Copy)?type=design&node-id=1-7266&mode=dev
+Сервис по поиску фильмов, который отправляет запрос к стороннему API с данными, получает их и сохраняет. Пользователь может найти фильм по ключевым словам и сохранить его в личном кабинете в разделе "Сохраненные фильмы".
+
+# Технологии:
+
+React+Vite, Node.js, MongoDB, Express, HTML, CSS, JavaScript, Api.
+
+IP 158.160.115.22
+URL https://zarmovies.nomoredomainsmonster.ru

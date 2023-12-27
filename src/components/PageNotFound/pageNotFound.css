@@ -60,6 +60,8 @@
 }
 
 .page-not-found__back-button {
+  border: none;
+  background-color: transparent;
   color: #4285f4;
   text-align: center;
   font-size: 14px;

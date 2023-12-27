@@ -1,78 +1,78 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import useValidationForm from '../hooks/useValidationForm';
+import { useState, useEffect, useContext } from "react";
+import FormInput from "../FormInput/FormInput";
+import { isValidEmail, isValidName } from "../../utils/validationConfig";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile({ handleLogin }) {
-  const { values, handleChange, resetForm, errors, isValid } = useValidationForm();
+function Profile({ isSuccess, submitResultText, onUpdate, onSignOut }) {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('')
+    const [isDisabled, setIsDisabled] = useState(true);
+    const currentUser = useContext(CurrentUserContext);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleLogin(values);
-  }
+    useEffect(() => {
+        setName(currentUser.name);
+        setEmail(currentUser.email);
+    }, [currentUser]);
 
-  React.useEffect(() => {
-    resetForm();
-  }, [resetForm]);
+    const handleName = (value) => {
+        setName(value);
+    }
 
-  return (
-    <main className="main">
-      <section className="profile">
-        <div className="profile__container">
-          <h1 className="profile__greeting">Привет, Евгений!</h1>
-          <form name="profile-form" className="profile-form" noValidate onSubmit={handleSubmit}>
-            <div className="profile-form__name-container">
-              <label className="profile-form__label">Имя</label>
-              <input
-                className={`profile-form__input ${errors.name && 'profile-form__paragraph-error'}`}
-                placeholder="Введите ваше имя"
-                onChange={handleChange}
-                value={values.name || ''}
-                type="name"
-                name="name"
-                autoComplete="off"
-                required
-                minLength={2}
-                maxLength={30}
-              ></input>
-            </div>
-            <p className="profile-form__paragraph">
-              <span className="profile-form__paragraph-error">{errors.name || ''}</span>
-            </p>
-            <div className="profile-form__email-container">
-              <label className="profile-form__label">E-mail</label>
-              <input
-                className={`profile-form__input ${errors.email && 'profile-form__paragraph-error'}`}
-                placeholder="Введите ваш email"
-                onChange={handleChange}
-                value={values.email || ''}
-                type="email"
-                name="email"
-                required
-                autoComplete="off"
-              ></input>
-            </div>
-            <p className="profile-form__paragraph">
-              <span className="profile-form__paragraph-error">{errors.email || ''}</span>
-            </p>
-            <div className="profile-form__buttons">
-              <button
-                type="submit"
-                className={`profile-form__button ${!isValid && 'profile-form__button_disabled'}`}
-                disabled={!isValid}
-              >
-                Редактировать
-              </button>
-              <Link to="/">
-                <button type="button" className="profile-form__button profile-form__button_red">
-                  Выйти из аккаунта
-                </button>
-              </Link>
-            </div>
-          </form>
-        </div>
-      </section>
-    </main>
-  );
+    const handleEmail = (value) => {
+        setEmail(value);
+    }
+
+    useEffect(() => {
+        (
+            name && email &&
+            (
+                name !== currentUser.name ||
+                email !== currentUser.email
+            )
+        ) ? setIsDisabled(false) : setIsDisabled(true);
+    }, [name, email, currentUser]);
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        onUpdate(email, name);
+    };
+
+    const handleSignOut = () => {
+        onSignOut();
+    }
+
+    return (
+        <section className="profile">
+            <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+            <form className="profile__info" onSubmit={handleSubmit}>
+                <FormInput
+                    className='profile'
+                    defaultValue={name}
+                    htmlFor='name'
+                    id='profile-name-input'
+                    name='name'
+                    type='text'
+                    placeholder='Имя'
+                    handleValue={handleName}
+                    checkValue={isValidName}
+                />
+                <FormInput
+                    className='profile'
+                    defaultValue={email}
+                    htmlFor='email'
+                    id='profile-email-input'
+                    name='email'
+                    type='email'
+                    placeholder='Email'
+                    handleValue={handleEmail}
+                    checkValue={isValidEmail}
+                />
+                <span className={`profile__submit-text ${isSuccess ? 'profile__submit-text_success' : 'profile__submit-text_failed'}`}>{submitResultText}</span>
+                <button type='submit' disabled={isDisabled} className={`profile__button profile__edit ${isDisabled ? 'profile__edit_disabled' : ''}`}>Редактировать</button>
+            </form>
+            <button className="profile__button profile__sign-out" onClick={handleSignOut}>Выйти из аккаунта</button>
+        </section>
+    )
 }
 
 export default Profile;

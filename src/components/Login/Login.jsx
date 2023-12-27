@@ -1,74 +1,75 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo-svg.svg';
-import useValidationForm from '../hooks/useValidationForm';
+import FormInput from '../FormInput/FormInput';
+import { isValidEmail } from '../../utils/validationConfig';
 
-function Login({ handleLogin }) {
-  const { values, handleChange, resetForm, errors, isValid } = useValidationForm();
+function Login({ onLogin }) {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleLogin(values);
-  }
+  const handleLogin = value => {
+    setLogin(value);
+  };
 
-  React.useEffect(() => {
-    resetForm();
-  }, [resetForm]);
+  const handlePassword = value => {
+    setPassword(value);
+  };
+
+  useEffect(() => {
+    login && password ? setIsDisabled(false) : setIsDisabled(true);
+  }, [login, password]);
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    onLogin(login, password);
+  };
 
   return (
-    <main className="main">
-      <form name="login" className="auth-form" noValidate onSubmit={handleSubmit}>
-        <div className="auth-form__container-login">
-          <Link to="/" className="auth-form__container-link">
-            <img src={logo} alt="Логотип проекта" className="auth-form__logo" />
-          </Link>
-          <h1 className="auth-form__title">Рады видеть!</h1>
-          <h2 className="auth-form__input-title">Email</h2>
-          <input
-            className={`auth-form__input ${errors.email && 'auth-form__error'}`}
-            onChange={handleChange}
-            value={values.email || ''}
-            type="email"
-            name="email"
-            placeholder="Введите ваш email"
-            required
-            autoComplete="off"
-          />
-          <span className="auth-form__error">{errors.email || ''}</span>
-          <h2 className="auth-form__input-title">Пароль</h2>
-          <input
-            className={`auth-form__input ${errors.password && 'auth-form__error'}`}
-            onChange={handleChange}
-            value={values.password || ''}
-            type="password"
-            name="password"
-            minLength={6}
-            maxLength={30}
-            placeholder="Введите ваш пароль"
-            required
-            autoComplete="off"
-          />
-          <span className="auth-form__error">{errors.password || ''}</span>
-          <Link to="/movies" className="auth-form__button auth-form__button_login">
-            <button
-              type="submit"
-              className={`auth-form__submit-button ${
-                !isValid && 'auth-form__submit-button_disabled'
-              }`}
-              disabled={!isValid}
-            >
-              Войти
-            </button>
-          </Link>
-          <p className="auth-form__text">
-            Ещё не зарегистрированы?
-            <Link to="/signup" className="auth-form__link">
-              Регистрация
-            </Link>
-          </p>
-        </div>
+    <div className="sign">
+      <Link to="/" className="sign__logo" />
+      <h2 className="sign__title">Рады видеть!</h2>
+      <form
+        className="sign__form"
+        id="login-form-container"
+        name="login-form"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <FormInput
+          className="sign"
+          htmlFor="email"
+          id="login-email-input"
+          name="email"
+          type="email"
+          placeholder="Email"
+          handleValue={handleLogin}
+          checkValue={isValidEmail}
+        />
+        <FormInput
+          className="sign"
+          htmlFor="password"
+          id="login-password-input"
+          name="password"
+          type="password"
+          placeholder="Пароль"
+          handleValue={handlePassword}
+        />
+        <button
+          disabled={isDisabled}
+          type="submit"
+          className={`sign__submit ${isDisabled ? 'sign__submit_disabled' : ''}`}
+        >
+          Войти
+        </button>
       </form>
-    </main>
+      <p className="sign__question">
+        Ещё не зарегистрированы?{' '}
+        <Link to="/signup" className="sign__redirect">
+          Регистрация
+        </Link>
+      </p>
+    </div>
   );
 }
 

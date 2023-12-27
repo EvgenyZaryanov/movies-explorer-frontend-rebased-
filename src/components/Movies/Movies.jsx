@@ -1,17 +1,24 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function Movies() {
-  return (
-    <main className="main">
-      <div className="movies">
-        <SearchForm />
-        <MoviesCardList />
-      </div>
-    </main>
-  );
+function Movies({ isLoading, films, searchReq, searchText, isSort, onSort, onSearch, onSave, onDelete }) {
+    return (
+        <section className="movies">
+            <SearchForm
+                onSort={onSort}
+                searchReq={searchReq}
+                isSort={isSort}
+                onSearch={onSearch}
+            />
+            <MoviesCardList
+                isLoading={isLoading}
+                films={films}
+                searchText={searchText}
+                onSave={onSave}
+                onDelete={onDelete}
+            />
+        </section>
+    );
 }
 
 export default Movies;
