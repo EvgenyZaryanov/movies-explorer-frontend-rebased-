@@ -50,6 +50,16 @@ class MainApi {
     }).then(res => this._checkResponse(res));
   }
 
+  getUserData() {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+        'Content-Type': 'application/json'
+      }
+    }).then(res => this._checkResponse(res));
+  }
+
   updateUserInfo(email, name) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',

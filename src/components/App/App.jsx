@@ -122,6 +122,9 @@ function App() {
       })
       .catch(err => {
         console.error('Ошибка: ', err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [isLoggedIn]);
 
@@ -164,7 +167,15 @@ function App() {
       .register(email, password, name)
       .then(() => {
         handleLogin(email, password);
-        navigate('/movies', { replace: true });
+        mainApi
+          .checkToken(localStorage.getItem('jwt'))
+          .then(data => {
+            setCurrentUser(data); // обновляем состояние пользователя
+            navigate('/movies', { replace: true });
+          })
+          .catch(err => {
+            console.error('Ошибка: ', err);
+          });
       })
       .catch(err => {
         console.error('Ошибка: ', err);
@@ -177,10 +188,15 @@ function App() {
       .then(data => {
         if (data.token) {
           localStorage.setItem('jwt', data.token);
-          setIsLoggedIn(true);
-          setCurrentUser(data);
-          navigate('/movies', { replace: true });
+          return mainApi.getUserData(); // Запрос данных пользователя
+        } else {
+          throw new Error('Неверные учетные данные');
         }
+      })
+      .then(data => {
+        setCurrentUser(data); // Сохранение данных пользователя
+        setIsLoggedIn(true);
+        navigate('/movies', { replace: true });
       })
       .catch(error => {
         console.error('Ошибка: ', error);
@@ -193,7 +209,18 @@ function App() {
     localStorage.removeItem('isSortFilms');
     localStorage.removeItem('searchParam');
     setIsLoggedIn(false);
-    navigate('/signin', { replace: true });
+    setSavedFilms([]);
+    setIsSortFilms(false);
+    setSearchedFilms([]);
+    setSearchParam('');
+    setSortedFilms([]);
+    setSearchText('');
+    setIsSortSavedFilms(false);
+    setSearchedSavedFilms([]);
+    setSearchParamSaved('');
+    setSortedSavedFilms([]);
+    setDisplayedSavedFilms([]);
+    navigate('/', { replace: true });
   }
 
   function handleUpdateUserInfo(email, name) {
@@ -360,3 +387,31 @@ function App() {
 }
 
 export default App;
+
+// function handleLogin(email, password) {
+//   mainApi
+//     .login(email, password)
+//     .then(data => {
+//       if (data.token) {
+//         localStorage.setItem('jwt', data.token);
+//         setIsLoggedIn(true);
+//         setCurrentUser(data);
+//         navigate('/movies', { replace: true });
+//       }
+//     })
+//     .catch(error => {
+//       console.error('Ошибка: ', error);
+//     });
+// }
+
+// const handleRegister = (email, password, name) => {
+//   mainApi
+//     .register(email, password, name)
+//     .then(() => {
+//       handleLogin(email, password);
+//       navigate('/movies', { replace: true });
+//     })
+//     .catch(err => {
+//       console.error('Ошибка: ', err);
+//     });
+// };
