@@ -167,15 +167,7 @@ function App() {
       .register(email, password, name)
       .then(() => {
         handleLogin(email, password);
-        mainApi
-          .checkToken(localStorage.getItem('jwt'))
-          .then(data => {
-            setCurrentUser(data); // обновляем состояние пользователя
-            navigate('/movies', { replace: true });
-          })
-          .catch(err => {
-            console.error('Ошибка: ', err);
-          });
+        navigate('/movies', { replace: true });
       })
       .catch(err => {
         console.error('Ошибка: ', err);
@@ -202,6 +194,19 @@ function App() {
         console.error('Ошибка: ', error);
       });
   }
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      mainApi
+        .getUserData()
+        .then(data => {
+          setCurrentUser(data); // Сохранение данных пользователя
+        })
+        .catch(error => {
+          console.error('Ошибка: ', error);
+        });
+    }
+  }, [isLoggedIn]);
 
   function handleSignOut() {
     localStorage.removeItem('jwt');
@@ -415,3 +420,36 @@ export default App;
 //       console.error('Ошибка: ', err);
 //     });
 // };
+
+// const handleRegister = (email, password, name) => {
+//   mainApi
+//     .register(email, password, name)
+//     .then(() => {
+//       handleLogin(email, password);
+//       mainApi
+//         .checkToken(localStorage.getItem('jwt'))
+//         .then(data => {
+//           setCurrentUser(data); // обновляем состояние пользователя
+//           navigate('/movies', { replace: true });
+//         })
+//         .catch(err => {
+//           console.error('Ошибка: ', err);
+//         });
+//     })
+//     .catch(err => {
+//       console.error('Ошибка: ', err);
+//     });
+// };
+
+// useEffect(() => {
+//   if (isLoggedIn) {
+//     mainApi
+//       .getUserData()
+//       .then(data => {
+//         setCurrentUser(data);
+//       })
+//       .catch(error => {
+//         console.error('Ошибка при получении данных пользователя: ', error);
+//       });
+//   }
+// }, [isLoggedIn]);

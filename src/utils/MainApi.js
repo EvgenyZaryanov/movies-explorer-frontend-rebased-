@@ -9,7 +9,6 @@ class MainApi {
     if (res.ok) {
       return res.json();
     }
-
     return Promise.reject(res.status);
   }
 
@@ -120,3 +119,5 @@ class MainApi {
 }
 
 export const mainApi = new MainApi(baseUrl);
+
+// this._getToken()
