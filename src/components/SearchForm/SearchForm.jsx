@@ -1,30 +1,56 @@
-import { useState, useRef } from "react";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import React from 'react';
+import FilterChechbox from './filterCheckbox/FilterChechbox';
 
-function SearchForm({ isSort, searchReq, onSort, onSearch }) {
-    const [inputValue, setInputValue] = useState(searchReq || '');
+function SearchForm({
+  isSearch,
+  setSearch,
+  isMoviesCheckbox,
+  setIsMoviesCheckbox,
+  errorFront,
+  setErrorFront
+}) {
+  const handleChange = event => {
+    const { value } = event.target;
+    setSearch(value);
+    setErrorFront('');
+  };
 
-    const handleChange = () => {
-        setInputValue(searchParam.current.value);
+  function handleCheckbox() {
+    setIsMoviesCheckbox(!isMoviesCheckbox);
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    if (!isSearch) {
+      setErrorFront('Нужно ввести ключевое слово');
+      localStorage.removeItem('isSearch');
+      localStorage.removeItem('moviesSearch');
+    } else {
+      setErrorFront('');
     }
+  };
 
-    const searchParam = useRef();
+  return (
+    <form className="search-form" id="search-form" onSubmit={handleSubmit} noValidate>
+      <div className="search-form__row">
+        <input
+          name="search"
+          className="search-form__input"
+          placeholder="Фильмы"
+          type="search"
+          value={isSearch}
+          required
+          maxLength="50"
+          onChange={handleChange}
+        />
+        <button className="search-form__button" type="submit" onClick={handleSubmit} />
+        {errorFront && <span className="search-form__error">{errorFront}</span>}
+      </div>
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-
-        onSearch(searchParam.current.value);
-    }
-
-    return(
-        <div className="search">
-            <form className="search-form" onSubmit={handleSubmit}>
-                <input className="search-form__input" id="search-form-input" value={inputValue} ref={searchParam} onChange={handleChange} name="search" type="text" placeholder="Фильм" />
-                <button className="search-form__button" type="submit" />
-            </form>
-            <FilterCheckbox isSort={isSort} onSort={onSort} />
-        </div>
-    );
+      <FilterChechbox handleCheckbox={handleCheckbox} isMoviesCheckbox={isMoviesCheckbox} />
+    </form>
+  );
 }
 
 export default SearchForm;

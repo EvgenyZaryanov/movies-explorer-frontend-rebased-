@@ -1,34 +1,56 @@
-import { useLocation, Link, NavLink } from 'react-router-dom';
-import { hiddenRoutes } from '../../utils/constants';
-import Navigation from '../Navigation/Navigation';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import logo from '../../images/logo.svg';
+import Navigation from '../navigation/Navigation';
+import ProfileNav from '../profileNav/ProfileNav';
+import BurgerMenu from '../burger-menu/BurgerMenu';
 
-function Header({ isLoggedIn, isOpenNav, openNav, closeNav }) {
-    const location = useLocation();
+function Header(props) {
+  const loggedIn = props.loggedIn;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
-    return (
-        !hiddenRoutes.includes(location.pathname) && (
-            <header className='header'>
-                <Link to='/' className='header__logo' />
-                {isLoggedIn ? (
-                    <>
-                        <div className='header__menu'>
-                            <NavLink to="/movies" className={({ isActive }) => `header__link ${isActive ? "header__link_active" : ""}`}>Фильмы</NavLink>
-                            <NavLink to="/saved-movies" className={({ isActive }) => `header__link ${isActive ? "header__link_active" : ""}`}>Сохранённые фильмы</NavLink>
-                        </div>
-                        <Link to='/profile' className='header__profile'>Аккаунт</Link>
-                        <button className='header__navigation' onClick={openNav} />
-                        <Navigation isOpenNav={isOpenNav} closeNav={closeNav} />
-                    </>
-                ) : (
-                    <div className='header__authentication'>
-                        <Link to='/signup' className='header__register'>Регистрация</Link>
-                        <Link to='/signin' className='header__auth'>Войти</Link>
-                    </div>
-                )
-                }
-            </header>
-        )
-    );
+  function handleBurgerMenuOpen() {
+    setIsMenuOpen(true);
+  }
+
+  function handleBurgerMenuClose() {
+    setIsMenuOpen(false);
+  }
+
+  return (
+    <header className="header">
+      <Link to="/" className="header__link">
+        <img src={logo} className="header__logo" alt="logo" />
+      </Link>
+      {loggedIn && (
+        <div className="header__navigation">
+          <Navigation />
+        </div>
+      )}
+      {location.pathname === '/' && !loggedIn ? (
+        <div className="header__sign">
+          <Link className="header__signup" to="/signup">
+            Регистрация
+          </Link>
+          <Link className="header__signin" to="/signin">
+            <button type="submit" className="header__signin-button">
+              Войти
+            </button>
+          </Link>
+        </div>
+      ) : (
+        ''
+      )}
+      {loggedIn && (
+        <div className="header__profile">
+          <ProfileNav />
+        </div>
+      )}
+      {loggedIn && <button className="header__burger-button" onClick={handleBurgerMenuOpen} />}
+      <BurgerMenu isMenuOpen={isMenuOpen} handleBurgerMenuClose={handleBurgerMenuClose} />
+    </header>
+  );
 }
 
 export default Header;

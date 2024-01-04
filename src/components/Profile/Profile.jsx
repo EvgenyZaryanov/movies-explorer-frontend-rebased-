@@ -1,78 +1,164 @@
-import { useState, useEffect, useContext } from "react";
-import FormInput from "../FormInput/FormInput";
-import { isValidEmail, isValidName } from "../../utils/validationConfig";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import React, { useState, useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { validName, validEmail } from '../../utils/validation';
 
-function Profile({ isSuccess, submitResultText, onUpdate, onSignOut }) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('')
-    const [isDisabled, setIsDisabled] = useState(true);
-    const currentUser = useContext(CurrentUserContext);
+function Profile({
+  onSignOut,
+  disabled,
+  setEditInputProfileActive,
+  editInputProfileActive,
+  isInputProfileChanges,
+  setInputProfileChanges,
+  handleEditProfile,
+  errorServer,
+  setErrorServer,
+  errorFront,
+  setErrorFront
+}) {
+  const currentUser = useContext(CurrentUserContext);
+  const [formProfile, setFormProfile] = useState({
+    name: currentUser.name,
+    email: currentUser.email
+  });
+  const [errors, setErrors] = useState({ name: '', email: '' });
 
-    useEffect(() => {
-        setName(currentUser.name);
-        setEmail(currentUser.email);
-    }, [currentUser]);
+  const handleChange = event => {
+    const { name, value } = event.target;
 
-    const handleName = (value) => {
-        setName(value);
-    }
+    setFormProfile({
+      ...formProfile,
+      [name]: value
+    });
 
-    const handleEmail = (value) => {
-        setEmail(value);
-    }
-
-    useEffect(() => {
-        (
-            name && email &&
-            (
-                name !== currentUser.name ||
-                email !== currentUser.email
-            )
-        ) ? setIsDisabled(false) : setIsDisabled(true);
-    }, [name, email, currentUser]);
-
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        onUpdate(email, name);
+    const profileErrors = {
+      ...errors,
+      [name]: name === 'name' ? validName(value) : validEmail(value)
     };
 
-    const handleSignOut = () => {
-        onSignOut();
+    setErrors(profileErrors);
+
+    // Проверка на наличие ошибок
+    let hasInputErrors = false;
+    for (let key in profileErrors) {
+      if (profileErrors[key] !== '') {
+        hasInputErrors = true;
+        break;
+      }
     }
 
-    return (
-        <section className="profile">
-            <h2 className="profile__title">Привет, {currentUser.name}!</h2>
-            <form className="profile__info" onSubmit={handleSubmit}>
-                <FormInput
-                    className='profile'
-                    defaultValue={name}
-                    htmlFor='name'
-                    id='profile-name-input'
-                    name='name'
-                    type='text'
-                    placeholder='Имя'
-                    handleValue={handleName}
-                    checkValue={isValidName}
-                />
-                <FormInput
-                    className='profile'
-                    defaultValue={email}
-                    htmlFor='email'
-                    id='profile-email-input'
-                    name='email'
-                    type='email'
-                    placeholder='Email'
-                    handleValue={handleEmail}
-                    checkValue={isValidEmail}
-                />
-                <span className={`profile__submit-text ${isSuccess ? 'profile__submit-text_success' : 'profile__submit-text_failed'}`}>{submitResultText}</span>
-                <button type='submit' disabled={isDisabled} className={`profile__button profile__edit ${isDisabled ? 'profile__edit_disabled' : ''}`}>Редактировать</button>
-            </form>
-            <button className="profile__button profile__sign-out" onClick={handleSignOut}>Выйти из аккаунта</button>
-        </section>
-    )
+    if (hasInputErrors) {
+      setErrorFront('');
+    }
+
+    setErrorServer('');
+
+    setInputProfileChanges(prevInfo => ({
+      ...prevInfo,
+      [name]: name === 'name' || name === 'email' ? value !== currentUser[name] : prevInfo[name]
+    }));
+  };
+
+  // Проверка на наличие изменений
+  const isProfileChange = Object.values(isInputProfileChanges).some(value => value);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    // Сохранение ошибок валидации полей
+    const profileErrors = {
+      email: validEmail(formProfile.email),
+      name: validName(formProfile.name)
+    };
+
+    setErrors(profileErrors);
+
+    // Проверка на валидность
+    const isFormValid =
+      Object.values(profileErrors).every(error => error === '') &&
+      Object.values(formProfile).every(value => value !== '');
+
+    if (isFormValid) {
+      handleEditProfile({ name: formProfile.name, email: formProfile.email });
+      setErrorFront('');
+      setErrorServer('');
+    } else {
+      setErrorFront('Во время обновления профиля произошла ошибка');
+    }
+  };
+
+  // Переключение кнопки "редактировать"
+  const buttonToggleEdit = () => {
+    setEditInputProfileActive(!editInputProfileActive);
+    setErrorFront('');
+    setErrorServer('');
+  };
+
+  // Сохранение имени и эл.почты
+  useEffect(() => {
+    setFormProfile({
+      name: currentUser.name,
+      email: currentUser.email
+    });
+  }, [currentUser]);
+
+  return (
+    <section className="profile">
+      <p className="profile__title">Привет, {currentUser.name}!</p>
+      <form onSubmit={handleSubmit} className="profile__form" noValidate>
+        <div className="profile__row">
+          <label className="profile__subtitle">Имя</label>
+          <input
+            className="profile__input profile__input_line"
+            type="text"
+            id="name"
+            placeholder="Введите Ваше имя"
+            value={formProfile.name}
+            name="name"
+            minLength="2"
+            maxLength="30"
+            onChange={handleChange}
+            disabled={!editInputProfileActive || disabled}
+          />
+          <span className="profile__error-validate">{errors.name}</span>
+        </div>
+        <div className="profile__row">
+          <label className="profile__subtitle">E-mail</label>
+          <input
+            className="profile__input"
+            type="email"
+            id="email"
+            placeholder="Введите Ваш email"
+            value={formProfile.email}
+            name="email"
+            onChange={handleChange}
+            disabled={!editInputProfileActive || disabled}
+          />
+          <span className="profile__error-validate">{errors.email}</span>
+        </div>
+        <span className="profile__error-server">{errorFront || errorServer}</span>
+        {editInputProfileActive && (
+          <button
+            className={`profile__button ${
+              (!isProfileChange || disabled) && 'profile__button_disabled'
+            }`}
+            type="submit"
+            onClick={handleSubmit}
+            disabled={!isProfileChange || disabled}
+          >
+            Сохранить
+          </button>
+        )}
+      </form>
+      {!editInputProfileActive && (
+        <button onClick={buttonToggleEdit} className="profile__button">
+          Редактировать
+        </button>
+      )}
+      <button onClick={onSignOut} className="profile__button-signout" type="submit">
+        Выйти из аккаунта
+      </button>
+    </section>
+  );
 }
 
 export default Profile;
