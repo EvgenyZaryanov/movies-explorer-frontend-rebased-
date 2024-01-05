@@ -3,13 +3,13 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Main from '../main/Main';
-import Movies from '../movies/Movies';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 import SavedMovies from '../savedMovies/SavedMovies';
-import Profile from '../profile/Profile';
-import PageNotFound from '../pageNotFound/PageNotFound';
+import Profile from '../Profile/Profile';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import Login from '../Login/Login';
-import Register from '../register/Register';
+import Register from '../Register/Register';
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
 import { register, authorize, signOut } from '../../utils/auth';
