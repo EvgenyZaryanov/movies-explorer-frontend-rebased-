@@ -1,14 +1,14 @@
 import React from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import Main from '../main/Main';
 import Movies from '../movies/Movies';
 import SavedMovies from '../savedMovies/SavedMovies';
 import Profile from '../profile/Profile';
 import PageNotFound from '../pageNotFound/PageNotFound';
-import Login from '../login/Login';
+import Login from '../Login/Login';
 import Register from '../register/Register';
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
