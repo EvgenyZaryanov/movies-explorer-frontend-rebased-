@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '../navigation/Navigation';
+import Navigation from '../Navigation/Navigation';
 import ProfileNav from '../profileNav/ProfileNav';
 function BurgerMenu(props) {
   return (
