@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import Navigation from '../navigation/Navigation';
+import Navigation from '../Navigation/Navigation';
 import ProfileNav from '../profileNav/ProfileNav';
 import BurgerMenu from '../burger-menu/BurgerMenu';
 

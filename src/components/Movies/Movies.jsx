@@ -1,7 +1,7 @@
 import React from 'react';
-import MoviesCardList from '../moviesCardList/MoviesCardList';
-import SearchForm from '../searchForm/SearchForm';
-import Preloader from '../preloader/Preloader';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
 import { filterShotMovies, filterAllMovies } from '../../utils/constants';
 
 const Movies = ({

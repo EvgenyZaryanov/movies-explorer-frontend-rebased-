@@ -1,6 +1,6 @@
 import React from 'react';
-import MoviesCardList from '../moviesCardList/MoviesCardList';
-import SearchForm from '../searchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from '../SearchForm/SearchForm';
 import { filterShotMovies, filterAllMovies } from '../../utils/constants';
 
 function SavedMovies({
