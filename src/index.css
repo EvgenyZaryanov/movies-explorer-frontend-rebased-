@@ -1,7 +1,7 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/font.css);
 
-@import url(./components/app/App.css);
+@import url(./components/App/App.css);
 @import url(./components/burger-menu/BurgerMenu.css);
 @import url(./components/header/Header.css);
 @import url(./components/infoTooltip/InfoTooltip.css);
