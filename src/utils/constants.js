@@ -1,3 +1,13 @@
-export const URL_REGEX = /http(s)?:\/\/(www)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-export const EMAIL_REGEXP =
-  /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+export const Movie_URL = "https://api.nomoreparties.co/";
+
+export const filterShotMovies = (movies) => {
+  return movies.filter((movie) => movie.duration <= 40);
+};
+
+export const filterAllMovies = (isSearch, movies) => {
+  return movies.filter(
+    (movie) =>
+      movie.nameRU.toLowerCase().includes(isSearch.toLowerCase()) ||
+      movie.nameEN.toLowerCase().includes(isSearch.toLowerCase())
+  );
+};
