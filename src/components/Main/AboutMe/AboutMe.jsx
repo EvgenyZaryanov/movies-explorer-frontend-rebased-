@@ -1,3 +1,5 @@
+import profilePhoto from '../../../images/profile-photo3.png';
+
 function AboutMe() {
   return (
     <section className="about-me" id="about-me">
@@ -22,11 +24,7 @@ function AboutMe() {
               Github
             </a>
           </div>
-          <img
-            className="about-me__photo"
-            src="/src/images/profile-photo3.jpg"
-            alt="моя фотография профиля"
-          />
+          <img className="about-me__photo" src={profilePhoto} alt="моя фотография профиля" />
         </div>
       </div>
     </section>
