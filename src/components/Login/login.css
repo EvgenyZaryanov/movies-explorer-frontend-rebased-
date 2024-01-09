@@ -4,11 +4,22 @@
   flex-direction: column;
   max-width: 396px;
   margin: 0 auto;
-  padding: 162px 0 0 0;
+  padding: 0px;
 }
 
 .form-auth__logo {
   margin-top: 70px;
+}
+
+@media screen and (max-width: 769px) {
+  .form-auth__logo {
+    margin-top: 232px;
+  }
+}
+@media screen and (max-width: 601px) {
+  .form-auth__logo {
+    margin-top: 56px;
+  }
 }
 
 .form-auth__title {
@@ -22,6 +33,17 @@
 .form-auth__container {
   margin-top: 40px;
   display: grid;
+}
+
+@media screen and (max-width: 769px) {
+  .form-auth__container {
+    margin-bottom: 214px;
+  }
+}
+@media screen and (max-width: 601px) {
+  .form-auth__container {
+    margin-bottom: 12px;
+  }
 }
 
 .form-auth__subtitle {
