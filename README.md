@@ -1,6 +1,7 @@
 # Проект "Movies-Explorer"
 
 Финальный проект на веб-факультете в @yandex.practicum.
+Фронтенд сверстан по [Макету в Figma](https://www.figma.com/file/muHBdaOkBPY9EilVzglJ5G/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-(Copy)?type=design&node-id=1-7266&mode=dev)
 
 ## Описание:
 
@@ -26,12 +27,16 @@ __Функционал:__
 
 Frontend:
 * __React + Vite.js__ 
-* __HTML__ 
-* __CSS__ 
+* __HTML5__ 
+* __CSS__
 * __JavaScript__ 
-* __ExpressJS__ 
+* __DOM__
+* __BEM__
+
+Backend:
+* __Node.js__ 
+* __Express.js__ 
 * __MongoDB__ 
-* __NodeJS__ 
 * __API__  
 * __Nginx__ 
 * __JWT__ 
@@ -47,5 +52,11 @@ __Серверная часть:__ [Backend](https://github.com/EvgenyZaryanov/m
 
 1. Клонируйте репозиторий на свой компьютер.
 2. Установите Vite командой __npm i vite__
-3. Установите зависимости командой __npm install__.
-4. Запустите проект командой __npm start__.
+3. Установите зависимости командой __npm install__
+4. Запустите проект командой __npm start__
+
+## Планы по развитию:
+
+- Добавление дополнительных возможнойстей и функциональности,
+- Усовершенствование интерфейса,
+- Внедрение новых технологий
