@@ -24,6 +24,7 @@ __Функционал:__
 
 ## Инструменты и стек:
 
+Frontend:
 * __React + Vite.js__ 
 * __HTML__ 
 * __CSS__ 
@@ -37,10 +38,9 @@ __Функционал:__
 * __Postman__
 * __YandexCloud__
 
-## Ссылка на проект:
+## Доступ к приложению:
+__IP:__  158.160.115.22 
 __Клиентская часть:__  [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
-__IP:__  158.160.115.22  
-
 __Серверная часть:__ [Backend](https://github.com/EvgenyZaryanov/movies-explorer-api)
 
 ## Установка и запуск проекта:
