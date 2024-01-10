@@ -38,10 +38,10 @@ __Функционал:__
 * __YandexCloud__
 
 ## Ссылка на проект:
-__URL:__  [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
-__IP__  158.160.115.22  
+__Клиентская часть:__  [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
+__IP:__  158.160.115.22  
 
-__Бэкенд приложения:__ https://github.com/EvgenyZaryanov/movies-explorer-api
+__Серверная часть:__ [Backend](https://github.com/EvgenyZaryanov/movies-explorer-api)
 
 ## Установка и запуск проекта:
 
