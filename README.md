@@ -39,8 +39,13 @@ __Функционал:__
 
 ## Ссылка на проект:
 __URL:__  [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
-__IP__ 158.160.115.22  
+__IP__  158.160.115.22  
 
-__Ссылка на бэкенд приложения:__ https://github.com/EvgenyZaryanov/movies-explorer-api
+__Бэкенд приложения:__ https://github.com/EvgenyZaryanov/movies-explorer-api
 
-## Как запустить проект локально:
+## Установка и запуск проекта:
+
+1. Клонируйте репозиторий на свой компьютер.
+2. Установите Vite командой __npm i vite__
+3. Установите зависимости командой __npm install__.
+4. Запустите проект командой __npm start__.
