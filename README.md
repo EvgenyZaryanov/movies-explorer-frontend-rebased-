@@ -39,7 +39,7 @@ Frontend:
 * __YandexCloud__
 
 ## Доступ к приложению:
-__IP:__  158.160.115.22 
+__IP:__  158.160.115.22  
 __Клиентская часть:__  [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
 __Серверная часть:__ [Backend](https://github.com/EvgenyZaryanov/movies-explorer-api)
 
