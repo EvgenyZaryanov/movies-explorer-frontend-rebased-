@@ -1,11 +1,8 @@
 # Проект "Movies-Explorer" <img src="src/images/film.png" width="30px" height="30px" alt="Книги"/> 
 
-Финальный проект на веб-факультете в @yandex.practicum.  
-Фронтенд сверстан по [Макету в Figma](https://www.figma.com/file/muHBdaOkBPY9EilVzglJ5G/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-(Copy)?type=design&node-id=1-7266&mode=dev)
-
 ## Описание:
 
-"Movies-Explorer" - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (SPA), написанное на "React" (часть frontend) и "Express" (часть backend).  
+__"Movies-Explorer"__ - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (SPA), написанное на "React" (часть frontend) и "Express" (часть backend).  
 
 Сервис использует стороннее API с данными (*сервис [beatfilm-movies](https://api.nomoreparties.co/beatfilm-movies)*).  
 
@@ -13,6 +10,7 @@
 __IP:__  158.160.115.22  
 __Frontend (деплой):__  [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
 __Backend:__ [Backend](https://github.com/EvgenyZaryanov/movies-explorer-api)  
+Фронтенд сверстан по [Макету в Figma](https://www.figma.com/file/muHBdaOkBPY9EilVzglJ5G/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-(Copy)?type=design&node-id=1-7266&mode=dev)  
 * проект прошел код-ревью
 
 __Вот что было сделано:__
