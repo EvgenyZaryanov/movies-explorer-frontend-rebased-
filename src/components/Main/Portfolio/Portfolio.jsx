@@ -18,6 +18,17 @@ function Portfolio() {
           <li className="portfolio__content-box">
             <a
               className="portfolio__site"
+              href="https://evgenyzaryanov.github.io/CyberPunk_Landing_page_test/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>Лэндинговая страница</span>
+              <span className="portfolio__arrow">↗</span>
+            </a>
+          </li>
+          <li className="portfolio__content-box">
+            <a
+              className="portfolio__site"
               href="https://evgenyzaryanov.github.io/russian-travel/index.html"
               target="_blank"
               rel="noreferrer"
@@ -29,7 +40,7 @@ function Portfolio() {
           <li className="portfolio__content-box">
             <a
               className="portfolio__site"
-              href="https://zaryanov.nomoredomainsmonster.ru/sign-in"
+              href="https://github.com/EvgenyZaryanov/react-mesto-api-full-gha"
               target="_blank"
               rel="noreferrer"
             >

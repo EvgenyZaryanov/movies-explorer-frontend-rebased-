@@ -124,7 +124,6 @@
 }
 
 .techs__description {
-  /* align-items: center; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
@@ -164,6 +163,11 @@
   letter-spacing: -0.56px;
   text-decoration: none;
   background-color: #303030;
+  transition: transform 0.3s ease;
+}
+
+.techs__name:hover {
+  transform: translateY(-5px);
 }
 
 @media screen and (max-width: 793px) {

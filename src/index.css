@@ -28,3 +28,5 @@
 @import url(./components/Register/register.css);
 @import url(./components/SearchForm/searchForm.css);
 @import url(./components/SearchForm/filterCheckbox/FilterChechbox.css);
+
+@import url(./components/Main/ScrollTopButton/ScrollTopButton.css);

@@ -1,4 +1,5 @@
 .promo {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,6 +7,10 @@
   background-color: #272727;
   margin: 20px 40px 0px;
   border-radius: 10px;
+  background-image: url(../../../images/film.png), url(../../../images/popcorn-icon.png);
+  background-position: right -115px top -20px, left -100px bottom -10px;
+  background-size: 250px 250px, 250px 250px;
+  background-repeat: no-repeat;
 }
 @media screen and (max-width: 769px) {
   .promo {
@@ -15,6 +20,8 @@
 @media screen and (max-width: 430px) {
   .promo {
     margin: 14px 14px 0px;
+    background-position: right -110px top -20px, left -80px bottom -5px;
+    background-size: 200px 200px, 200px 200px;
   }
 }
 
@@ -50,6 +57,7 @@
   font-size: 50px;
   font-weight: normal;
   line-height: 58px;
+  z-index: 1;
 }
 
 @media screen and (max-width: 769px) {
@@ -68,4 +76,8 @@
     line-height: 37px;
     letter-spacing: -1.16px;
   }
+}
+
+.promo__title_color {
+  color: #3ddc84;
 }

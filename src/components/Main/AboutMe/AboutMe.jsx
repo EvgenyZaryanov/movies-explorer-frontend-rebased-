@@ -4,16 +4,17 @@ function AboutMe() {
   return (
     <section className="about-me" id="about-me">
       <div className="about-me__container">
-        <h2 className="about-me__title">Студент</h2>
+        <h2 className="about-me__title">Автор</h2>
         <div className="about-me__content">
           <div className="about-me__info">
             <h3 className="about-me__info-header">Евгений</h3>
-            <h4 className="about-me__info-subheader">Фронтенд-разработчик, 31 год</h4>
+            <h4 className="about-me__info-subheader">Фулстек-разработчик, 31 год</h4>
             <p className="about-me__info-description">
-              Я родился и живу в Москве, закончил факультет глобальных процессов МГУ, по
-              специальности международные отношения. С 2015 года работал в НКО, занимающейся
-              внешнеполитической деятельностью. С весны 2023 года решил сменить род деятельности и
-              занялся программированием.
+              Родился и живу в Москве, имею оконченное высшее образование МГУ. Есть опыт
+              коммерческой разработки. Также имею трудовой стаж в качестве руководителя проектов и
+              координатора программ, что позволяет вглянуть на процесс разработки под разными
+              углами. С радостью стану частью дружной команды разработчиков, нацеленных на
+              результат.
             </p>
             <a
               className="about-me__info-github"

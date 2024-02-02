@@ -24,7 +24,7 @@ function NavTab() {
         smooth={true}
         duration={500}
       >
-        Студент
+        Автор
       </ScrollLink>
     </nav>
   );
