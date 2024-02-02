@@ -1,88 +1,121 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo-svg.svg';
-import useValidationForm from '../hooks/useValidationForm';
+import logo from '../../images/logo.svg';
+import { useValidation } from '../../utils/validation';
 
-function Register({ handleRegister }) {
-  const { values, handleChange, resetForm, errors, isValid } = useValidationForm();
+function Register({ isRegisterUser, setErrorServer, errorServer, disabled }) {
+  const requiredInput = ['name', 'email', 'password'];
+  const { values, handleChange, errors, isValid, resetForm } = useValidation({
+    name: '',
+    email: '',
+    password: ''
+  });
+  const { name, email, password } = values;
 
-  function handleSubmit(e) {
+  const isValidForm = isValid && requiredInput.every(data => values[data] !== undefined);
+
+  const handleSubmit = e => {
     e.preventDefault();
-    handleRegister(values);
-  }
+
+    if (isValidForm) {
+      isRegisterUser({ name, email, password });
+      setErrorServer('');
+    } else {
+      setErrorServer('При регистрации пользователя произошла ошибка');
+    }
+    setErrorServer('');
+  };
 
   React.useEffect(() => {
     resetForm();
   }, [resetForm]);
 
   return (
-    <main className="main">
-      <form name="registration" className="auth-form" noValidate onSubmit={handleSubmit}>
-        <div className="auth-form__container">
-          <Link to="/" className="auth-form__container-link">
-            <img src={logo} alt="Логотип проекта" className="auth-form__logo" />
-          </Link>
-          <h1 className="auth-form__title">Добро пожаловать!</h1>
-          <h2 className="auth-form__input-title">Имя</h2>
+    <section className="form-auth">
+      <Link to="/">
+        <img className="form-auth__logo" alt="логотип" src={logo} />
+      </Link>
+      <p className="form-auth__title">Добро пожаловать!</p>
+      <form onSubmit={handleSubmit} className="form-auth__container" noValidate>
+        <div className="form-auth__cell">
+          <span htmlFor="name" className="form-auth__subtitle">
+            Имя
+          </span>
           <input
-            className={`auth-form__input ${errors.name && 'auth-form__error'}`}
-            onChange={handleChange}
-            value={values.name || ''}
+            className={`form-auth__input ${
+              errors.name ? 'form-auth__input_error' : 'form-auth__input_valid'
+            }`}
             type="name"
+            id="name"
             name="name"
-            placeholder="Введите ваше имя"
-            autoComplete="off"
+            minLength="2"
+            maxLength="200"
+            placeholder="Введите имя"
             required
-            minLength={2}
-            maxLength={30}
-          />
-          <span className="auth-form__error">{errors.name || ''}</span>
-          <h2 className="auth-form__input-title">Email</h2>
-          <input
-            className={`auth-form__input ${errors.email && 'auth-form__error'}`}
+            value={values.name || ''}
             onChange={handleChange}
-            value={values.email || ''}
+          />
+          <span className="form-auth__error-validate">{errors.name}</span>
+        </div>
+        <div className="form-auth__cell">
+          <span htmlFor="email" className="form-auth__subtitle">
+            E-mail
+          </span>
+          <input
+            className={`form-auth__input ${
+              errors.email ? 'form-auth__input_error' : 'form-auth__input_valid'
+            }`}
             type="email"
+            id="email"
             name="email"
-            placeholder="Введите ваш email"
+            minLength="2"
+            maxLength="40"
+            placeholder="Введите Email"
             required
-            autoComplete="off"
-          />
-          <span className="auth-form__error">{errors.email || ''}</span>
-          <h2 className="auth-form__input-title">Пароль</h2>
-          <input
-            className={`auth-form__input ${errors.password && 'auth-form__error'}`}
+            value={values.email || ''}
             onChange={handleChange}
-            value={values.password || ''}
-            type="password"
-            name="password"
-            minLength={6}
-            maxLength={30}
-            placeholder="Введите ваш пароль"
-            required
-            autoComplete="off"
           />
-          <span className="auth-form__error">{errors.password || ''}</span>
-          <Link to="/movies" className="auth-form__button">
-            <button
-              type="submit"
-              className={`auth-form__submit-button ${
-                !isValid && 'auth-form__submit-button_disabled'
-              }`}
-              disabled={!isValid}
-            >
-              Зарегистрироваться
-            </button>
-          </Link>
-          <p className="auth-form__text">
-            Уже зарегистрированы?
-            <Link to="/signin" className="auth-form__link">
-              Войти
+          <span className="form-auth__error-validate">{errors.email}</span>
+        </div>
+        <div className="form-auth__cell">
+          <span htmlFor="password" className="form-auth__subtitle">
+            Пароль
+          </span>
+          <input
+            className={`form-auth__input ${
+              errors.password ? 'form-auth__input_error' : 'form-auth__input_valid'
+            }`}
+            type="password"
+            id="password"
+            name="password"
+            minLength="2"
+            maxLength="200"
+            placeholder="Введите пароль"
+            required
+            value={values.password || ''}
+            onChange={handleChange}
+          />
+          <span className="form-auth__error-validate">{errors.password}</span>
+        </div>
+        <div className="form-auth__error-container">
+          <span className="form-auth__error-message">{errorServer}</span>
+          <button
+            className={`form-auth__button ${!isValidForm || disabled}`}
+            type="submit"
+            disabled={!isValidForm || disabled}
+          >
+            Зарегистрироваться
+          </button>
+          <p className="form-auth__question">
+            Уже зарегестрированы?
+            <Link to="/signin" className="form-auth__link">
+              {' '}
+              Войти
             </Link>
           </p>
         </div>
       </form>
-    </main>
+    </section>
   );
 }
 

@@ -1,158 +1,62 @@
-.burger-menu {
-  display: none;
-}
-@media (max-width: 769px) {
-  .burger-menu {
-    display: block;
-    cursor: pointer;
-    padding: 0px;
-    background-image: url('../../images/burger-menu-icon.svg');
-    width: 38px;
-    height: 38px;
-    /* background-position: center; */
-    /* background-repeat: no-repeat; */
-    background-size: contain;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    opacity: 1;
-    cursor: pointer;
-    transition: transform 0.3s ease-in;
-  }
-}
-.burger-menu:hover {
-  opacity: 0.8;
-  transform: scale(0.9);
+.navigation {
+  display: flex;
+  margin: 28px 0 28px 0px;
 }
 
-.burger-popup {
-  position: relative;
-  width: 520px;
-  height: 100%;
-  display: none;
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  background: #202020;
-  border: none;
-  z-index: 10;
+.navigation__link {
+  color: #fff;
+  font-size: 13px;
+  line-height: 18px;
+  margin-right: 16px;
+  text-decoration: none;
+  font-weight: 400;
 }
-@media (max-width: 769px) {
-  .burger-popup {
-    display: block;
-    transform: translateX(0%);
+
+.navigation__link_hidden {
+  visibility: hidden;
+}
+
+.navigation__link:last-child {
+  margin-right: 0;
+}
+
+.navigation__link:hover {
+  opacity: 0.7;
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    text-align: center;
+    margin: 76px 0 0 0;
   }
-}
-@media (max-width: 546px) {
-  .burger-popup {
-    /* display: flex; */
+
+  .navigation__link {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 28px 0 0 0;
+    align-self: center;
+  }
+  .navigation__link_active {
+    font-weight: 400;
+    position: relative;
+  }
+
+  .navigation__link_active::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: -5px;
+    height: 2px;
     width: 100%;
-    align-items: center;
+    background-color: #fff;
   }
-}
 
-.burger-popup__close-button {
-  position: absolute;
-  top: 22.44px;
-  right: 22.44px;
-  padding: 0px;
-  background-image: url('../../images/close-icon.svg');
-  width: 28px;
-  height: 28px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  opacity: 1;
-  cursor: pointer;
-  transition: transform 0.5s ease-out;
-}
-.burger-popup__close-button:hover {
-  opacity: 0.8;
-  transform: scale(1.5);
-}
-@media (max-width: 430px) {
-  .burger-popup__close-button {
-    top: 13.44px;
-    right: 13.44px;
+  .navigation__link_hidden {
+    visibility: visible;
   }
-}
-
-.burger-popup__links {
-  list-style-type: none;
-  margin: 159px auto 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  align-items: center;
-  padding: 0px;
-}
-@media (max-width: 430px) {
-  .burger-popup__links {
-    margin: 144px 10px 0px;
-    gap: 24px;
-  }
-}
-
-.burger-popup__hyperlink {
-  text-decoration: none;
-  color: #fff;
-  text-align: center;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.burger-popup__hyperlink_active {
-  padding-bottom: 6px;
-  border-bottom: 1px solid #fff;
-}
-@media (max-width: 769px) {
-  .burger-popup__hyperlink_active {
-    padding-bottom: 8px;
-  }
-}
-
-.burger-popup__profile-link {
-  width: 100px;
-  height: 32px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  border-radius: 20px;
-  background: #313131;
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  text-decoration: none;
-  margin: 597px auto 90px;
-  opacity: 1;
-  cursor: pointer;
-  transition: transform 0.3s linear;
-}
-.burger-popup__profile-link:hover {
-  opacity: 0.8;
-  transform: scale(0.9);
-}
-@media (max-width: 430px) {
-  .burger-popup__profile-link {
-    margin: 420px 110px 46px;
-  }
-}
-
-.burger-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
 }

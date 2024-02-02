@@ -1,24 +1,54 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../../images/logo-svg.svg';
+import logo from '../../images/logo.svg';
+import Navigation from '../Navigation/Navigation';
+import ProfileNav from '../profileNav/ProfileNav';
+import BurgerMenu from '../burger-menu/BurgerMenu';
 
-function Header() {
+function Header(props) {
+  const loggedIn = props.loggedIn;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+
+  function handleBurgerMenuOpen() {
+    setIsMenuOpen(true);
+  }
+
+  function handleBurgerMenuClose() {
+    setIsMenuOpen(false);
+  }
 
   return (
     <header className="header">
-      <div className="header__container">
-        <img src={logo} alt="Логотип сайта" className="header__logo" />
-        <nav className="header__navigation">
-          <Link to="/signup" className="header__link header__link_black">
+      <Link to="/" className="header__link">
+        <img src={logo} className="header__logo" alt="logo" />
+      </Link>
+      {loggedIn && (
+        <div className="header__navigation">
+          <Navigation />
+        </div>
+      )}
+      {location.pathname === '/' && !loggedIn ? (
+        <div className="header__sign">
+          <Link className="header__signup" to="/signup">
             Регистрация
           </Link>
-          <Link to="/signin" className="header__link">
-            Войти
+          <Link className="header__signin" to="/signin">
+            <button type="submit" className="header__signin-button">
+              Войти
+            </button>
           </Link>
-        </nav>
-      </div>
+        </div>
+      ) : (
+        ''
+      )}
+      {loggedIn && (
+        <div className="header__profile">
+          <ProfileNav />
+        </div>
+      )}
+      {loggedIn && <button className="header__burger-button" onClick={handleBurgerMenuOpen} />}
+      <BurgerMenu isMenuOpen={isMenuOpen} handleBurgerMenuClose={handleBurgerMenuClose} />
     </header>
   );
 }

@@ -1,67 +1,46 @@
-import { useState, useEffect } from 'react';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import MoreMovies from '../Movies/moreMovies/MoreMovies';
+import MoviesCard from '../moviesСard/MoviesCard';
 
-function MoviesCardList() {
-  const initialCardsToShow = 12;
-  const additionalCardsToShow = 3;
-
-  const allCards = [
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard },
-    { MoviesCard }
-  ];
-
-  const [cardsToShow, setCardsToShow] = useState(initialCardsToShow);
-
-  const handleShowMore = () => {
-    setCardsToShow(prevCardsToShow => prevCardsToShow + additionalCardsToShow);
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width >= 1280) {
-        setCardsToShow(12);
-      } else if (width >= 768) {
-        setCardsToShow(8);
-      } else if (width >= 425) {
-        setCardsToShow(5);
-      } else {
-        setCardsToShow(5);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
+function MoviesCardList({
+  movies,
+  isAllMoviesDisplayed,
+  loadMore,
+  saveMovies,
+  disabled,
+  handleSaveMovies,
+  handleDeleteMovie
+}) {
+  const location = useLocation();
   return (
-    <section className="movie-cardList">
-      <ul className="movie-cardList__container">
-        {allCards.slice(0, cardsToShow).map((card, index) => (
-          <MoviesCard key={index} {...card} />
-        ))}
-      </ul>
-      {cardsToShow < allCards.length && (
-        <button className="movie-cardList__more-button" type="button" onClick={handleShowMore}>
-          Еще
-        </button>
-      )}
+    <section className="movies-card-list">
+      <div className="movies-card-list__container">
+        {location.pathname === '/movies'
+          ? movies.map(movie => (
+              <MoviesCard
+                key={movie.id}
+                movie={movie}
+                saveMovies={saveMovies}
+                handleSaveMovies={handleSaveMovies}
+                disabled={disabled}
+                handleDeleteMovie={handleDeleteMovie}
+              />
+            ))
+          : saveMovies.map(movie => (
+              <MoviesCard
+                key={movie._id}
+                movie={movie}
+                saveMovies={saveMovies}
+                handleSaveMovies={handleSaveMovies}
+                disabled={disabled}
+                handleDeleteMovie={handleDeleteMovie}
+              />
+            ))}
+      </div>
+      {location.pathname === '/movies'
+        ? !isAllMoviesDisplayed && <MoreMovies loadMore={loadMore} />
+        : ''}
     </section>
   );
 }
