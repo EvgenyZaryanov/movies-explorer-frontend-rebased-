@@ -40,7 +40,7 @@ function Portfolio() {
           <li className="portfolio__content-box">
             <a
               className="portfolio__site"
-              href="https://github.com/EvgenyZaryanov/react-mesto-api-full-gha"
+              href="https://zaryanov.nomoredomainsmonster.ru/"
               target="_blank"
               rel="noreferrer"
             >
