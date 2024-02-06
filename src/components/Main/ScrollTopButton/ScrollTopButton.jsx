@@ -24,12 +24,10 @@ const ScrollToTopButton = () => {
 
   return (
     <button
-      id="scrollTopButton"
+      className="scrollTopButton"
       onClick={scrollToTop}
       style={{ display: isVisible ? 'block' : 'none' }}
-    >
-      <img src="/src/images/Arrow-UP.svg" alt="Scroll to top" />
-    </button>
+    ></button>
   );
 };
 
