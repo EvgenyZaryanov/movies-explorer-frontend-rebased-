@@ -1,10 +1,11 @@
 <div id="header" align="center">
   <img src="https://media.giphy.com/media/2XflxzDAw5pn6WaA372/giphy.gif" width="200px" height="100px"/>
 </div>
-<div id="title" align="center">
-__Проект "Movies-Explorer"__
-  </div>
+<h1 id="title" align="center">
+Проект "Movies Explorer"
+  </h1>  
 ---
+
 ## Описание
 
 **"Movies-Explorer"** - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (SPA), написанное на "React" (часть frontend) и "Express" (часть backend).
