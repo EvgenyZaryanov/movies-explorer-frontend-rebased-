@@ -1,4 +1,6 @@
-<div id="header" align="center" style="width:100%;height:0;padding-bottom:58%;position:relative;"><iframe src="https://giphy.com/embed/eYwDrm9suCZzy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/maudit-maudit-camera-sam-raimi-eYwDrm9suCZzy">via GIPHY</a></p>
+<div id="header" align="center">
+  <img src="https://giphy.com/embed/eYwDrm9suCZzy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen/>
+</div>
 
 # Проект "Movies-Explorer" <img src="src/images/film.png" width="30px" height="30px" alt="Книги"/>
 
