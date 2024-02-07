@@ -4,6 +4,10 @@
 
 ## Описание
 
+https://github.com/EvgenyZaryanov/movies-explorer-frontend-rebased-/assets/128030479/150b4b10-57ea-48e0-b935-288e541918ef
+
+
+
 **"Movies-Explorer"** - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (MPA), написанное на "React" (часть frontend) и "Express" (часть backend).
 
 Сервис использует стороннее API с данными (_сервис [beatfilm-movies](https://api.nomoreparties.co/beatfilm-movies)_).
