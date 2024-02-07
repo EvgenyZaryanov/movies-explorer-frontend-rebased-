@@ -1,10 +1,9 @@
 <div id="header" align="center">
   <img src="https://media.giphy.com/media/2XflxzDAw5pn6WaA372/giphy.gif" width="200px" height="100px"/>
 </div>
-<h1 id="title" align="center">
-Проект "Movies Explorer"
-  </h1>  
----
+
+#Проект "Movies Explorer" 
+---  
 
 ## Описание
 
