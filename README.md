@@ -2,7 +2,7 @@
   <img src="https://media.giphy.com/media/l2JdYngx1BoYBTzEI/giphy.gif" width="100%"/>
 </div>
 
-# Проект "Movies-Explorer" <img src="src/images/film.png" width="30px" height="30px" alt="Книги"/>
+# Проект "Movies-Explorer" <img src="https://media.giphy.com/media/eYwDrm9suCZzy/giphy.gif" width="30px" height="30px" alt="Проектор"/>
 
 ## Описание
 
