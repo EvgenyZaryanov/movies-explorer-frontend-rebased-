@@ -1,6 +1,6 @@
 # "Movies Explorer" 
 
-<video src='https://skrinshoter.ru/vOA3lZ0Od8o' width=180/>
+<video src='https://skrinshoter.ru/vOA3lZ0Od8o' width=180/></video>
 
 ## Описание
 
