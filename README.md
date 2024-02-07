@@ -2,12 +2,11 @@
   <img src="https://media.giphy.com/media/2XflxzDAw5pn6WaA372/giphy.gif" width="200px" height="100px"/>
 </div>
 
-#Проект "Movies Explorer" 
----  
+# Проект "Movies Explorer" 
 
 ## Описание
 
-**"Movies-Explorer"** - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (SPA), написанное на "React" (часть frontend) и "Express" (часть backend).
+**"Movies-Explorer"** - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (MPA), написанное на "React" (часть frontend) и "Express" (часть backend).
 
 Сервис использует стороннее API с данными (_сервис [beatfilm-movies](https://api.nomoreparties.co/beatfilm-movies)_).
 
