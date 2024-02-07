@@ -1,5 +1,8 @@
+<div id="header" align="left">
+  <img src="https://media.giphy.com/media/eYwDrm9suCZzy/giphy.gif" width="300px"/>
+</div>
 
-# Проект "Movies-Explorer" <img src="https://media.giphy.com/media/eYwDrm9suCZzy/giphy.gif" width="80px" height="50px" alt="Проектор"/>
+# Проект "Movies-Explorer"
 
 ## Описание
 
