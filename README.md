@@ -1,5 +1,7 @@
 # "Movies Explorer" 
 
+<video src='https://skrinshoter.ru/vOA3lZ0Od8o' width=180/>
+
 ## Описание
 
 **"Movies-Explorer"** - приложение для поиска и просмотра фильмов международного фестиваля документального кино о новой культуре ["Beat Film Festival"](https://beatfilmfestival.ru/). Проект представляет собой отзывчиво-адаптивное приложение (MPA), написанное на "React" (часть frontend) и "Express" (часть backend).
