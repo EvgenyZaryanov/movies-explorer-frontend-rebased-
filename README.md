@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img [src="https://giphy.com/embed/eYwDrm9suCZzy" width="100px" height="100px"](https://media.giphy.com/media/eYwDrm9suCZzy/giphy.gif)/>
+  <img src="https://media.giphy.com/media/eYwDrm9suCZzy/giphy.gif" width="100"/>
 </div>
 
 # Проект "Movies-Explorer" <img src="src/images/film.png" width="30px" height="30px" alt="Книги"/>
