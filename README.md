@@ -14,7 +14,7 @@ https://github.com/EvgenyZaryanov/movies-explorer-frontend-rebased-/assets/12803
 
 ## Доступ к приложению (временно недоступен в связи с переносом приложения на другой сервер)
 
-**IP:** 158.160.115.22  
+**IP:** 158.160.24.68  
 **Frontend (деплой):** [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
 **Backend:** [Backend](https://github.com/EvgenyZaryanov/movies-explorer-api)  
 Фронтенд сверстан по [Макету в Figma](<https://www.figma.com/file/muHBdaOkBPY9EilVzglJ5G/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D1%8B%D0%B9-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-(Copy)?type=design&node-id=1-7266&mode=dev>)
