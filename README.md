@@ -12,7 +12,7 @@ https://github.com/EvgenyZaryanov/movies-explorer-frontend-rebased-/assets/12803
 
 Сервис использует стороннее API с данными (_сервис [beatfilm-movies](https://api.nomoreparties.co/beatfilm-movies)_).
 
-## Доступ к приложению (временно недоступен в связи с переносом приложения на другой сервер)
+## Доступ к приложению
 
 **IP:** 158.160.24.68  
 **Frontend (деплой):** [Movies-Explorer](https://zarmovies.nomoredomainsrocks.ru)  
